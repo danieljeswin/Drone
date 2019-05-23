@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="xacro_robot_file" value="$(find sjtu_drone)/urdf/drone.urdf.xacro"/>
+  <group ns="drone1">
+    <arg name="name" value="drone1"/>
+    <arg name="xloc" value="2"/>
+    <arg name="yloc" value="3"/>
+    <arg name="zloc" value="0"/>
+    <param command="$(find xacro)/xacro '$(arg xacro_robot_file)' prefix:=$(arg name) xPos:=$(arg xloc) yPos:=$(arg yloc) zPos:=$(arg zloc)" name="robot_description"/>
+    <node args="-param robot_description -urdf -model $(arg name) -z 0.5" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
+  </group>
+  <group ns="drone2">
+    <arg name="name" value="drone2"/>
+    <arg name="xloc" value="2"/>
+    <arg name="yloc" value="0"/>
+    <arg name="zloc" value="0"/>
+    <param command="$(find xacro)/xacro '$(arg xacro_robot_file)' prefix:=$(arg name) xPos:=$(arg xloc) yPos:=$(arg yloc) zPos:=$(arg zloc)" name="robot_description"/>
+    <node args="-param robot_description -urdf -model $(arg name) -z 0.5" name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"/>
+  </group>
+</launch>

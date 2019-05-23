@@ -1,0 +1,18 @@
+<launch>
+    
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find sjtu_drone)/worlds/garching_kitchen.world"/>
+        <arg name="paused" value="true"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="recording" value="true"/>
+        <arg name="debug" value="false"/>
+    </include>
+
+    <param name="robot_description" textfile="$(find sjtu_drone)/models/sjtu_drone/sjtu_drone.urdf"/>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf
+        -model sjtu_drone -x 0.0 -y 0.0 -z 0.5"/>
+
+</launch>
